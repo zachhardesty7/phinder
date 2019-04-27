@@ -24,18 +24,8 @@ import { AuthService } from '../src/Auth'
 import { db } from '../src/integrations'
 
 export default class Profile extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: 'Profile'
-    // headerLeft: (
-    //   <Button transparent onPress={() => navigation.push('Profile')}>
-    //     <Thumbnail small source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
-    //   </Button>
-    // ),
-    // headerRight: (
-    //   <Button transparent onPress={() => alert('This is a button!')}>
-    //     <Icon name='settings' />
-    //   </Button>
-    // )
   });
 
   state = {

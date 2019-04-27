@@ -11,6 +11,7 @@ import {
   Font,
   Icon
 } from 'expo'
+import { Root } from 'native-base'
 import AppNavigator from './navigation/AppNavigator'
 
 export default class App extends React.Component {
@@ -29,10 +30,12 @@ export default class App extends React.Component {
       )
     }
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-        <AppNavigator />
-      </View>
+      <Root>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+          <AppNavigator />
+        </View>
+      </Root>
     )
   }
 

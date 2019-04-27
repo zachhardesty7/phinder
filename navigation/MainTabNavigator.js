@@ -1,12 +1,11 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 
 import { Icon } from 'native-base'
 
 import HomeScreen from '../screens/HomeScreen'
-import LinksScreen from '../screens/LinksScreen'
-import SettingsScreen from '../screens/SettingsScreen'
+import OrgsScreen from '../screens/OrgsScreen'
+import OrgScreen from '../screens/OrgScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 
 import Colors from '../constants/Colors'
@@ -33,45 +32,27 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={`information-circle${focused ? '' : '-outline'}`}
+      name='home'
     />
   )
 }
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen
+const OrgsStack = createStackNavigator({
+  Orgs: OrgsScreen,
+  Org: OrgScreen
+}, {
+  mode: 'modal'
 })
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+OrgsStack.navigationOptions = {
+  tabBarLabel: 'Orgs',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name='link'
+      name='eye'
     />
   )
 }
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
-})
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name='options'
-    />
-  )
-}
-
-// const ProfileStack = createStackNavigator({
-//   Test: TestScreen,
-//   Profile: ProfileScreen
-// }, {
-//   mode: 'modal'
-// })
 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen
@@ -89,7 +70,6 @@ ProfileStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  OrgsStack,
   ProfileStack
 })
