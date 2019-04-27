@@ -1,6 +1,4 @@
-import React from 'react'
 import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation'
-import { Text, View } from 'react-native'
 
 import MainTabNavigator from './MainTabNavigator'
 
