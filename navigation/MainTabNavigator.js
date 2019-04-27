@@ -2,13 +2,27 @@ import React from 'react'
 import { Platform } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon'
+import { Icon } from 'native-base'
+
 import HomeScreen from '../screens/HomeScreen'
 import LinksScreen from '../screens/LinksScreen'
 import SettingsScreen from '../screens/SettingsScreen'
-import TestScreen from '../screens/TestScreen'
-
 import ProfileScreen from '../screens/ProfileScreen'
+
+import Colors from '../constants/Colors'
+
+const TabBarIcon = ({ name, focused }) => (
+  <Icon
+    name={name}
+    focused={focused}
+    style={{
+      color: focused
+        ? Colors.tabIconSelected
+        : Colors.tabIconDefault,
+      marginBottom: -3
+    }}
+  />
+)
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -19,11 +33,7 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={`information-circle${focused ? '' : '-outline'}`}
     />
   )
 }
@@ -37,7 +47,7 @@ LinksStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name='link'
     />
   )
 }
@@ -51,24 +61,28 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name='options'
     />
   )
 }
 
-const TestStack = createStackNavigator({
-  Test: TestScreen,
+// const ProfileStack = createStackNavigator({
+//   Test: TestScreen,
+//   Profile: ProfileScreen
+// }, {
+//   mode: 'modal'
+// })
+
+const ProfileStack = createStackNavigator({
   Profile: ProfileScreen
-}, {
-  mode: 'modal'
 })
 
-TestStack.navigationOptions = {
-  tabBarLabel: 'Test',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name='contact'
     />
   )
 }
@@ -77,5 +91,5 @@ export default createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
-  TestStack
+  ProfileStack
 })

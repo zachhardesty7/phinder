@@ -22,12 +22,14 @@ module.exports = {
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react-native/no-raw-text': 'off',
     'react/prop-types': [
       'warn',
       {
         skipUndeclared: true
       }
     ],
+    'react/require-default-props': 'off',
     'react/no-unescaped-entities': 'off',
     'react/jsx-filename-extension': [
       'warn',
@@ -38,14 +40,15 @@ module.exports = {
         ]
       }
     ],
-    'standard/array-bracket-even-spacing': 'off',
-    'standard/computed-property-even-spacing': 'off',
-    'standard/object-curly-even-spacing': 'off',
-    'no-console': 'off',
     'jsx-quotes': [
       'error',
       'prefer-single'
     ],
+    'standard/array-bracket-even-spacing': 'off',
+    'standard/computed-property-even-spacing': 'off',
+    'standard/object-curly-even-spacing': 'off',
+    'import/prefer-default-export': 'off',
+    'no-console': 'off',
     'sort-imports': [
       'warn',
       {
