@@ -1,7 +1,8 @@
 // import styled from 'styled-components/native'
 import React, { Component } from 'react'
 import {
-  Image
+  AsyncStorage,
+  View
 } from 'react-native'
 import {
   Button,
@@ -15,93 +16,107 @@ import {
   Picker,
   Spinner,
   Text,
-  Textarea
+  Textarea,
+  Thumbnail
 } from 'native-base'
 
 import 'firebase/firestore'
+import styled from 'styled-components/native'
 
+import { view } from 'react-easy-state'
 import { AuthService } from '../src/Auth'
 import { db } from '../src/integrations'
+import { user } from '../src/userStore'
 
-export default class Profile extends Component {
+const S = {}
+
+S.Thumbnail = styled(Thumbnail)`
+  display: flex;
+  align-items: center;
+  align-self: center;
+  padding: 5px;
+`
+
+S.Button = styled(Button)`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  text-align: center;
+`
+
+S.View = styled(View)`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: row;
+`
+
+S.Text = styled(Text)`
+  text-align: center;
+`
+
+export default view(class Profile extends Component {
   static navigationOptions = () => ({
     title: 'Profile'
   });
 
   state = {
     loading: false,
-    user: null
+    data: user.data
   };
 
-  componentDidMount = async() => {
-    AuthService.subscribeAuthChange(async(data) => {
-      if (data && data.providerData && data.providerData[0]) {
-        this.setState({ loading: true })
-        const { uid } = data.providerData[0]
-        const user = await db.collection('users').doc(uid).get()
-        this.setState({ user: user.data(), loading: false })
-      }
-    })
-  }
+  handleLogout = async() => {
+    await AuthService.logout()
+    await AsyncStorage.clear()
 
-  handleLogin = () => {
-    this.setState({ loading: true })
-    AuthService.loginWithFacebook()
-  }
-
-  handleLogout = () => {
-    this.setState({ user: null })
-    AuthService.logout()
+    this.props.navigation.navigate('Auth')
   }
 
   handleSaveClick = () => {
-    const { user } = this.state
+    const { data } = this.state
+    user.data = data
 
     db
       .collection('users')
-      .doc(user.uid)
-      .set(user)
+      .doc(data.uid)
+      .set(data)
   }
 
   handleFormFieldChange = (key, value) => {
-    const { user } = this.state
+    const { data } = this.state
 
     this.setState({
-      user: { ...user, [key]: value }
+      data: { ...data, [key]: value }
     })
   }
 
   render() {
-    const { loading, user } = this.state
+    const { loading, data } = this.state
 
-    if (loading) {
-      return (
+    return (
+      loading ? (
         <Container>
           <Content>
-            <Text>Logging in...</Text>
+            <Text>Loading Profile...</Text>
             <Spinner />
           </Content>
         </Container>
-      )
-    }
-
-    return (
-      user ? (
-        <Container>
+      ) : (
+        <S.Container>
           <Content>
-            <Image style={{ width: 50, height: 50 }} source={{ uri: user.photoURL }} />
+            <S.Thumbnail large source={{ uri: data.photoURL }} />
             <Form>
               <Item stackedLabel>
                 <Label>Full Name</Label>
-                <Input value={user.displayName} onChangeText={text => this.handleFormFieldChange('displayName', text)} />
+                <Input value={data.displayName} onChangeText={text => this.handleFormFieldChange('displayName', text)} />
               </Item>
               <Item stackedLabel>
                 <Label>Email</Label>
-                <Input value={user.email} onChangeText={text => this.handleFormFieldChange('email', text)} />
+                <Input value={data.email} onChangeText={text => this.handleFormFieldChange('email', text)} />
               </Item>
               <Item stackedLabel>
                 <Label>Phone</Label>
-                <Input value={user.phoneNumber} onChangeText={text => this.handleFormFieldChange('phoneNumber', text)} />
+                <Input value={data.phoneNumber} onChangeText={text => this.handleFormFieldChange('phoneNumber', text)} />
               </Item>
               <Item picker stackedLabel>
                 <Label>Year</Label>
@@ -111,7 +126,7 @@ export default class Profile extends Component {
                   placeholder='select your year'
                   placeholderStyle={{ color: '#bfc6ea' }}
                   placeholderIconColor='#007aff'
-                  selectedValue={user.year}
+                  selectedValue={data.year}
                   onValueChange={val => this.handleFormFieldChange('year', val)}
                 >
                   <Picker.Item label='Freshman' value='freshman' />
@@ -122,37 +137,30 @@ export default class Profile extends Component {
               </Item>
               <Item stackedLabel>
                 <Label>Major</Label>
-                <Input value={user.major} onChangeText={text => this.handleFormFieldChange('major', text)} />
+                <Input value={data.major} onChangeText={text => this.handleFormFieldChange('major', text)} />
               </Item>
               <Item stackedLabel>
                 <Label>Bio</Label>
                 <Textarea
-                  rowSpan={5}
-                  value={user.bio}
+                  rowSpan={4}
+                  value={data.bio}
                   onChangeText={text => this.handleFormFieldChange('bio', text)}
                   placeholder='Write a little something about yourself!'
                 />
               </Item>
             </Form>
 
-            <Button onPress={this.handleSaveClick} title='Save Changes' success>
-              <Text>Save Changes</Text>
-            </Button>
-            <Button onPress={this.handleLogout} title='Logout' light>
-              <Text>Logout</Text>
-            </Button>
+            <S.View>
+              <S.Button onPress={this.handleSaveClick} title='Save Changes' success>
+                <S.Text>Save Changes</S.Text>
+              </S.Button>
+              <S.Button onPress={this.handleLogout} title='Logout' light>
+                <S.Text>Logout</S.Text>
+              </S.Button>
+            </S.View>
           </Content>
-        </Container>
-      ) : (
-        <Container>
-          <Content>
-            <Text>Welcome!</Text>
-            <Button onPress={this.handleLogin} title='Login with Facebook'>
-              <Text>Login with Facebook</Text>
-            </Button>
-          </Content>
-        </Container>
+        </S.Container>
       )
     )
   }
-}
+})

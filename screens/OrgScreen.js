@@ -11,7 +11,11 @@ import {
   Toast
 } from 'native-base'
 
-export default class Org extends Component {
+import { view } from 'react-easy-state'
+import { db } from '../src/integrations'
+import { user } from '../src/userStore'
+
+export default view(class Org extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Org',
     headerLeft: (
@@ -21,9 +25,37 @@ export default class Org extends Component {
     )
   });
 
+  handleApply = async() => {
+    const { navigation } = this.props
+    const id = navigation.getParam('key', 'key')
+
+    const org = await db
+      .collection('orgs')
+      .doc(id)
+      .get()
+
+    const { applications, members } = org.data()
+
+    if (!applications.includes(user.data.uid) && !members.includes(user.data.uid)) {
+      applications.push(user.data.uid)
+    }
+
+    Toast.show({
+      type: 'success',
+      duration: 3000,
+      text: 'Application submitted!',
+      buttonText: 'Okay'
+    })
+
+    await db
+      .collection('orgs')
+      .doc(id)
+      .update({ applications })
+  }
+
   render() {
     const { navigation } = this.props
-    const name = navigation.getParam('name', 'Peter')
+    const name = navigation.getParam('name', 'Organization')
 
     return (
       <Container>
@@ -31,12 +63,7 @@ export default class Org extends Component {
           <Text>{name}</Text>
           <Button
             block
-            onPress={() => Toast.show({
-              type: 'success',
-              duration: 3000,
-              text: 'Application submitted!',
-              buttonText: 'Okay'
-            })}
+            onPress={this.handleApply}
           >
             <Text>Apply to Org</Text>
           </Button>
@@ -44,4 +71,4 @@ export default class Org extends Component {
       </Container>
     )
   }
-}
+})

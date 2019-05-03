@@ -2,14 +2,28 @@ import React from 'react'
 import {
   Container,
   Content,
-  List,
+  H1,
   Text
 } from 'native-base'
-import { Agenda, Calendar, CalendarList } from 'react-native-calendars'
+import { Calendar } from 'react-native-calendars'
+import { view } from 'react-easy-state'
+import styled from 'styled-components/native'
 
-export default class HomeScreen extends React.Component {
+const S = {}
+
+S.H1 = styled(H1)`
+  text-align: center;
+  padding: 30px 0;
+`
+
+S.Text = styled(Text)`
+  text-align: center;
+  padding: 5px;
+`
+
+class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home'
+    title: 'Phinder'
   };
 
   state = {
@@ -21,7 +35,7 @@ export default class HomeScreen extends React.Component {
 
     return (
       <Container>
-        <Text>Phinder</Text>
+        <S.H1>Upcoming Events</S.H1>
         <Calendar
           markedDates={selected}
           onDayPress={(day) => {
@@ -36,10 +50,12 @@ export default class HomeScreen extends React.Component {
         />
         <Content>
           {selected && (
-            <Text>No upcoming events, check back later</Text>
+            <S.Text>No upcoming events, check back later</S.Text>
           )}
         </Content>
       </Container>
     )
   }
 }
+
+export default view(HomeScreen)

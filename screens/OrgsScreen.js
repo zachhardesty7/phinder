@@ -34,40 +34,37 @@ export default class OrgsScreen extends React.Component {
   render() {
     const { navigation } = this.props
     const { data, loading } = this.state
-
-    if (loading) {
-      return (
+    return (
+      loading ? (
         <Container>
           <Content>
             <Text>loading orgs...</Text>
             <Spinner />
           </Content>
         </Container>
+      ) : (
+        <Container>
+          <Content>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => (
+                <ListItem
+                  button
+                  activeOpacity={0.5}
+                  onPress={() => navigation.push('Org', item)}
+                >
+                  <Left>
+                    <Text>{item.name}</Text>
+                  </Left>
+                  <Right>
+                    <Icon name='arrow-forward' />
+                  </Right>
+                </ListItem>
+              )}
+            />
+          </Content>
+        </Container>
       )
-    }
-
-    return (
-      <Container>
-        <Content>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <ListItem
-                button
-                activeOpacity={0.5}
-                onPress={() => navigation.push('Org', item)}
-              >
-                <Left>
-                  <Text>{item.name}</Text>
-                </Left>
-                <Right>
-                  <Icon name='arrow-forward' />
-                </Right>
-              </ListItem>
-            )}
-          />
-        </Content>
-      </Container>
     )
   }
 }

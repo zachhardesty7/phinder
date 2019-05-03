@@ -23,7 +23,12 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.zachhardesty.phinder",
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "package": "com.zachhardesty.phinder"
+    },
+    "description": ""
   }
 }
