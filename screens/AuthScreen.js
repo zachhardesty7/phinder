@@ -1,22 +1,12 @@
-// import styled from 'styled-components/native'
 import React, { Component } from 'react'
 import {
-  AsyncStorage,
-  Image
+  AsyncStorage
 } from 'react-native'
 import {
   Button,
   Container,
   Content,
-  Form,
-  Icon,
-  Input,
-  Item,
-  Label,
-  Picker,
-  Spinner,
-  Text,
-  Textarea
+  Text
 } from 'native-base'
 
 import 'firebase/firestore'
@@ -32,20 +22,20 @@ export default view(class Profile extends Component {
   });
 
   componentDidMount = async() => {
+    const { navigation } = this.props
+
     AuthService.subscribeAuthChange(async(data) => {
       if (data && data.providerData && data.providerData[0]) {
         await AsyncStorage.setItem('uid', data.providerData[0].uid)
         const userData = await db.collection('users').doc(data.providerData[0].uid).get()
         user.data = userData.data()
-        this.props.navigation.navigate('Home')
+        navigation.navigate('Home')
       }
     })
   }
 
   handleLogin = async() => {
     await AuthService.loginWithFacebook()
-    // await AsyncStorage.setItem('user', user)
-    // this.props.navigation.navigate('App')
   }
 
   render() {

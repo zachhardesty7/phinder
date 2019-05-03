@@ -10,9 +10,6 @@ import {
 } from 'react-native'
 import { WebBrowser } from 'expo'
 
-// import { Ionicons } from '@expo/vector-icons'
-// import styled from 'styled-components/native'
-
 import { MonoText } from '../components/StyledText'
 
 export default class HomeScreen extends React.Component {

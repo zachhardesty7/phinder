@@ -1,4 +1,3 @@
-// import styled from 'styled-components/native'
 import React, { Component } from 'react'
 import {
   AsyncStorage,
@@ -66,10 +65,12 @@ export default view(class Profile extends Component {
   };
 
   handleLogout = async() => {
+    const { navigation } = this.props
+
     await AuthService.logout()
     await AsyncStorage.clear()
 
-    this.props.navigation.navigate('Auth')
+    navigation.navigate('Auth')
   }
 
   handleSaveClick = () => {

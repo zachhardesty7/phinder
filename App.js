@@ -12,7 +12,6 @@ import {
   Icon
 } from 'expo'
 import { Root } from 'native-base'
-import { store } from 'react-easy-state'
 import AppNavigator from './navigation/AppNavigator'
 
 export default class App extends React.Component {
@@ -45,7 +44,10 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+    const { skipLoadingScreen } = this.props
+    const { isLoadingComplete } = this.state
+
+    if (!isLoadingComplete && !skipLoadingScreen) {
       return (
         <AppLoading
           startAsync={this.loadResourcesAsync}
@@ -67,7 +69,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    flex: 1
   }
 })
