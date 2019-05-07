@@ -103,7 +103,7 @@ export default view(class Profile extends Component {
           </Content>
         </Container>
       ) : (
-        <S.Container>
+        <Container>
           <Content>
             <S.Thumbnail large source={{ uri: data.photoURL }} />
             <Form>
@@ -160,7 +160,7 @@ export default view(class Profile extends Component {
               </S.Button>
             </S.View>
           </Content>
-        </S.Container>
+        </Container>
       )
     )
   }

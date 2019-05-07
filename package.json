@@ -21,6 +21,7 @@
     "firebase": "^5.10.1",
     "native-base": "^2.12.1",
     "react": "16.5.0",
+    "react-content-loader": "^4.2.1",
     "react-easy-state": "^6.1.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-app-auth": "^4.3.1",

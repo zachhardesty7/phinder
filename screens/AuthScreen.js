@@ -16,7 +16,7 @@ import { AuthService } from '../src/Auth'
 import { db } from '../src/integrations'
 import { user } from '../src/userStore'
 
-export default view(class Profile extends Component {
+class AuthScreen extends Component {
   static navigationOptions = () => ({
     title: 'Please sign in'
   });
@@ -50,4 +50,6 @@ export default view(class Profile extends Component {
       </Container>
     )
   }
-})
+}
+
+export default view(AuthScreen)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { FlatList } from 'react-native'
 import {
   Container,
   Content,
@@ -9,25 +10,30 @@ import {
   Text
 } from 'native-base'
 
-const List = () => (
+export const List = ({
+  data,
+  navigation,
+  loading = false
+}) => (
   <Container>
     <Content>
-      <List>
-        <ListItem first button>
-          <Left>
-            <Text>Simon Mignolet</Text>
-          </Left>
-          <Right>
-            <Icon name='arrow-forward' />
-          </Right>
-        </ListItem>
-        <ListItem selected>
-          <Text>Nathaniel Clyne</Text>
-        </ListItem>
-        <ListItem last>
-          <Text>Dejan Lovren</Text>
-        </ListItem>
-      </List>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <ListItem
+            button
+            activeOpacity={0.5}
+            onPress={() => navigation.push('Org', item)}
+          >
+            <Left>
+              <Text>{item.name}</Text>
+            </Left>
+            <Right>
+              <Icon name='arrow-forward' />
+            </Right>
+          </ListItem>
+        )}
+      />
     </Content>
   </Container>
 )

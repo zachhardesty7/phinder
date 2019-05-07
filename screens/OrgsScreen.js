@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import {
-  Button,
   Container,
   Content,
   Icon,
@@ -9,12 +8,13 @@ import {
   ListItem,
   Right,
   Spinner,
-  Text,
-  Thumbnail
+  Text
 } from 'native-base'
 import { db } from '../src/integrations'
 
-export default class OrgsScreen extends React.Component {
+import { List } from '../components'
+
+class OrgsScreen extends React.Component {
   static navigationOptions = () => ({
     title: 'Orgs'
   })
@@ -34,6 +34,7 @@ export default class OrgsScreen extends React.Component {
   render() {
     const { navigation } = this.props
     const { data, loading } = this.state
+
     return (
       loading ? (
         <Container>
@@ -43,28 +44,10 @@ export default class OrgsScreen extends React.Component {
           </Content>
         </Container>
       ) : (
-        <Container>
-          <Content>
-            <FlatList
-              data={data}
-              renderItem={({ item }) => (
-                <ListItem
-                  button
-                  activeOpacity={0.5}
-                  onPress={() => navigation.push('Org', item)}
-                >
-                  <Left>
-                    <Text>{item.name}</Text>
-                  </Left>
-                  <Right>
-                    <Icon name='arrow-forward' />
-                  </Right>
-                </ListItem>
-              )}
-            />
-          </Content>
-        </Container>
+        <List data={data} navigation={navigation} />
       )
     )
   }
 }
+
+export default OrgsScreen

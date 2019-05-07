@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import {
+  Body,
   Button,
+  Card,
+  CardItem,
   Container,
   Content,
   Icon,
+  Left,
   Text,
+  Thumbnail,
   Toast
 } from 'native-base'
 
@@ -12,7 +17,7 @@ import { view } from 'react-easy-state'
 import { db } from '../src/integrations'
 import { user } from '../src/userStore'
 
-export default view(class Org extends Component {
+class OrgScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Org',
     headerLeft: (
@@ -52,20 +57,62 @@ export default view(class Org extends Component {
 
   render() {
     const { navigation } = this.props
-    const name = navigation.getParam('name', 'Organization')
+    const name = navigation.getParam('name', null)
+    const address = navigation.getParam('address', null)
+    const bio = navigation.getParam('bio', null)
+    const email = navigation.getParam('email', null)
+    const facebook = navigation.getParam('facebook', null)
+    const image = navigation.getParam('image', null)
+    const instagram = navigation.getParam('instagram', null)
+    const phone = navigation.getParam('phone', null)
+    const twitter = navigation.getParam('twitter', null)
+    const website = navigation.getParam('website', null)
 
     return (
       <Container>
         <Content>
-          <Text>{name}</Text>
-          <Button
-            block
-            onPress={this.handleApply}
-          >
-            <Text>Apply to Org</Text>
-          </Button>
+          <Card style={{ flex: 0 }}>
+            <CardItem>
+              <Left>
+                {image && <Thumbnail source={{ uri: image }} />}
+                <Body>
+                  <Text>{name}</Text>
+                  {website && <Text note>{website}</Text>}
+                </Body>
+              </Left>
+            </CardItem>
+            <CardItem>
+              <Body>
+                {bio && <Text>{bio}</Text>}
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>Contact Info</Text>
+                {address && <Text>{address}</Text>}
+                {email && <Text>{email}</Text>}
+                {facebook && <Text>{facebook}</Text>}
+                {instagram && <Text>{instagram}</Text>}
+                {twitter && <Text>{twitter}</Text>}
+                {phone && <Text>{phone}</Text>}
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Left>
+                <Button
+                  block
+                  onPress={this.handleApply}
+                >
+                  <Text>Apply to Org</Text>
+                </Button>
+              </Left>
+            </CardItem>
+          </Card>
+
         </Content>
       </Container>
     )
   }
-})
+}
+
+export default view(OrgScreen)
