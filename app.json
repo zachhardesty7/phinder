@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Phinder",
+    "description": "Connect organizations and students on college campuses",
     "slug": "phinder",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -28,7 +29,6 @@
     },
     "android": {
       "package": "com.zachhardesty.phinder"
-    },
-    "description": ""
+    }
   }
 }

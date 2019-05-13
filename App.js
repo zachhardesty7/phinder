@@ -16,7 +16,7 @@ import AppNavigator from './navigation/AppNavigator'
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isReady: false
   }
 
   loadResourcesAsync = async() => Promise.all([
@@ -40,14 +40,14 @@ export default class App extends React.Component {
   };
 
   handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true })
+    this.setState({ isReady: true })
   };
 
   render() {
     const { skipLoadingScreen } = this.props
-    const { isLoadingComplete } = this.state
+    const { isReady } = this.state
 
-    if (!isLoadingComplete && !skipLoadingScreen) {
+    if (!isReady && !skipLoadingScreen) {
       return (
         <AppLoading
           startAsync={this.loadResourcesAsync}
