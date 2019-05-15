@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Linking } from 'react-native'
 import {
   Body,
   Button,
@@ -6,6 +7,7 @@ import {
   CardItem,
   Container,
   Content,
+  H1,
   Icon,
   Left,
   Text,
@@ -76,8 +78,8 @@ class OrgScreen extends Component {
               <Left>
                 {image && <Thumbnail source={{ uri: image }} />}
                 <Body>
-                  <Text>{name}</Text>
-                  {website && <Text note>{website}</Text>}
+                  <H1>{name}</H1>
+                  {website && <Text onPress={() => Linking.openURL(website).catch(err => console.error(err))} note>{website}</Text>}
                 </Body>
               </Left>
             </CardItem>

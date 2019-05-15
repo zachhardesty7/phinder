@@ -1,19 +1,36 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import styled from 'styled-components/native'
+import { View } from 'react-native'
 import {
   Button,
   Container,
   Content,
   Icon,
-  Left,
-  ListItem,
-  Right,
   Spinner,
   Text
 } from 'native-base'
 import { db } from '../src/integrations'
 
 import { List } from '../components'
+
+const S = {}
+
+S.View = styled(View)`
+  display: flex;
+  flex: 1;
+  align-self: center;
+  justify-content: center;
+`
+
+S.Spinner = styled(Spinner)`
+  display: flex;
+  align-self: center;
+  margin-top: 20px;
+`
+
+S.Text = styled(Text)`
+  text-align: center;
+`
 
 class OrgsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -42,16 +59,18 @@ class OrgsScreen extends React.Component {
     const { data, loading } = this.state
 
     return (
-      loading ? (
-        <Container>
-          <Content>
-            <Text>loading orgs...</Text>
-            <Spinner />
-          </Content>
-        </Container>
-      ) : (
-        <List data={data} navigation={navigation} />
-      )
+      <Container>
+        <Content>
+          { loading ? (
+            <S.View>
+              <S.Spinner color='blue' />
+              <S.Text>loading orgs...</S.Text>
+            </S.View>
+          ) : (
+            <List data={data} navigation={navigation} />
+          )}
+        </Content>
+      </Container>
     )
   }
 }
