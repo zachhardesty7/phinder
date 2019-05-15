@@ -14,10 +14,18 @@ import {
   Thumbnail,
   Toast
 } from 'native-base'
+import styled from 'styled-components/native'
 
 import { view } from 'react-easy-state'
 import { db } from '../src/integrations'
 import { user } from '../src/userStore'
+
+const S = {}
+
+S.Button = styled(Button)`
+  display: flex;
+  margin: 0 5px;
+`
 
 class OrgScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -29,7 +37,7 @@ class OrgScreen extends Component {
     )
   });
 
-  handleApply = async() => {
+  handleApplyPress = async() => {
     const { navigation } = this.props
     const id = navigation.getParam('key', 'key')
 
@@ -38,7 +46,7 @@ class OrgScreen extends Component {
       .doc(id)
       .get()
 
-    const { applications, members } = org.data()
+    const { applications = [], members = [] } = org.data()
 
     if (!applications.includes(user.data.uid) && !members.includes(user.data.uid)) {
       applications.push(user.data.uid)
@@ -57,8 +65,15 @@ class OrgScreen extends Component {
       .update({ applications })
   }
 
+  handleWebsitePress = (website) => {
+    Linking.openURL(website).catch(err => console.error(err))
+  }
+
   render() {
     const { navigation } = this.props
+
+    const key = navigation.getParam('key', null)
+
     const name = navigation.getParam('name', null)
     const address = navigation.getParam('address', null)
     const bio = navigation.getParam('bio', null)
@@ -70,6 +85,10 @@ class OrgScreen extends Component {
     const twitter = navigation.getParam('twitter', null)
     const website = navigation.getParam('website', null)
 
+    const applications = navigation.getParam('applications', [])
+    const members = navigation.getParam('members', [])
+    const owner = navigation.getParam('owner', null)
+
     return (
       <Container>
         <Content>
@@ -79,7 +98,7 @@ class OrgScreen extends Component {
                 {image && <Thumbnail source={{ uri: image }} />}
                 <Body>
                   <H1>{name}</H1>
-                  {website && <Text onPress={() => Linking.openURL(website).catch(err => console.error(err))} note>{website}</Text>}
+                  {website && <Text onPress={link => this.handleWebsitePress} note>{website}</Text>}
                 </Body>
               </Left>
             </CardItem>
@@ -101,12 +120,30 @@ class OrgScreen extends Component {
             </CardItem>
             <CardItem>
               <Left>
-                <Button
-                  block
-                  onPress={this.handleApply}
-                >
-                  <Text>Apply to Org</Text>
-                </Button>
+                { user.data.uid !== owner && (
+                  <S.Button
+                    block
+                    onPress={this.handleApplyPress}
+                  >
+                    <Text>Apply to Org</Text>
+                  </S.Button>
+                )}
+                { user.data.uid === owner && (
+                  <>
+                    <S.Button
+                      block
+                      onPress={() => navigation.push('Members', { key, members })}
+                    >
+                      <Text>View Members</Text>
+                    </S.Button>
+                    <S.Button
+                      block
+                      onPress={() => navigation.push('Applications', { key, members, applications })}
+                    >
+                      <Text>View Applications</Text>
+                    </S.Button>
+                  </>
+                )}
               </Left>
             </CardItem>
           </Card>

@@ -85,8 +85,7 @@ class OrgCreateScreen extends Component {
 
     await db
       .collection('orgs')
-      .doc()
-      .push(info)
+      .add(info)
 
     await Toast.show({
       type: 'success',

@@ -6,6 +6,8 @@ import { Icon } from 'native-base'
 import HomeScreen from '../screens/HomeScreen'
 import OrgsScreen from '../screens/OrgsScreen'
 import OrgScreen from '../screens/OrgScreen'
+import ApplicationsScreen from '../screens/ApplicationsScreen'
+import MembersScreen from '../screens/MembersScreen'
 import OrgCreateScreen from '../screens/OrgCreateScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 
@@ -41,7 +43,9 @@ HomeStack.navigationOptions = {
 const OrgsStack = createStackNavigator({
   Orgs: OrgsScreen,
   Org: OrgScreen,
-  OrgCreate: OrgCreateScreen
+  OrgCreate: OrgCreateScreen,
+  Applications: ApplicationsScreen,
+  Members: MembersScreen
 }, {
   mode: 'modal'
 })
