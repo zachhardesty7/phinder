@@ -1,6 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import {
+  Button,
   Container,
   Content,
   Icon,
@@ -15,8 +16,13 @@ import { db } from '../src/integrations'
 import { List } from '../components'
 
 class OrgsScreen extends React.Component {
-  static navigationOptions = () => ({
-    title: 'Orgs'
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Orgs',
+    headerRight: (
+      <Button transparent onPress={() => navigation.push('OrgCreate')}>
+        <Icon ios='ios-add' android='md-add' />
+      </Button>
+    )
   })
 
   state = {

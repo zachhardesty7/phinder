@@ -6,6 +6,7 @@
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
     "start": "expo start",
+    "dev": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
@@ -30,7 +31,8 @@
     "react-native-elements": "^1.1.0",
     "react-native-hooks": "^0.0.6",
     "react-navigation": "^3.0.9",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
