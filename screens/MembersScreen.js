@@ -10,8 +10,7 @@ import {
   ListItem,
   Right,
   Spinner,
-  Text,
-  Toast
+  Text
 } from 'native-base'
 import { db } from '../src/integrations'
 

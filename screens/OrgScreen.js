@@ -8,6 +8,7 @@ import {
   Container,
   Content,
   H1,
+  H3,
   Icon,
   Left,
   Text,
@@ -24,7 +25,7 @@ const S = {}
 
 S.Button = styled(Button)`
   display: flex;
-  margin: 0 5px;
+  margin-right: 10px;
 `
 
 class OrgScreen extends Component {
@@ -37,20 +38,15 @@ class OrgScreen extends Component {
     )
   });
 
-  handleApplyPress = async() => {
-    const { navigation } = this.props
-    const id = navigation.getParam('key', 'key')
-
-    const org = await db
-      .collection('orgs')
-      .doc(id)
-      .get()
-
-    const { applications = [], members = [] } = org.data()
-
+  handleApplyPress = async(id, applications, members) => {
     if (!applications.includes(user.data.uid) && !members.includes(user.data.uid)) {
       applications.push(user.data.uid)
     }
+
+    await db
+      .collection('orgs')
+      .doc(id)
+      .update({ applications })
 
     Toast.show({
       type: 'success',
@@ -58,11 +54,6 @@ class OrgScreen extends Component {
       text: 'Application submitted!',
       buttonText: 'Okay'
     })
-
-    await db
-      .collection('orgs')
-      .doc(id)
-      .update({ applications })
   }
 
   handleWebsitePress = (website) => {
@@ -72,27 +63,29 @@ class OrgScreen extends Component {
   render() {
     const { navigation } = this.props
 
-    const key = navigation.getParam('key', null)
+    const {
+      key,
+      name,
+      address,
+      bio,
+      email,
+      facebook,
+      image,
+      instagram,
+      phone,
+      twitter,
+      website,
+      applications = [],
+      members = [],
+      owner
+    } = navigation.state.params.item
 
-    const name = navigation.getParam('name', null)
-    const address = navigation.getParam('address', null)
-    const bio = navigation.getParam('bio', null)
-    const email = navigation.getParam('email', null)
-    const facebook = navigation.getParam('facebook', null)
-    const image = navigation.getParam('image', null)
-    const instagram = navigation.getParam('instagram', null)
-    const phone = navigation.getParam('phone', null)
-    const twitter = navigation.getParam('twitter', null)
-    const website = navigation.getParam('website', null)
-
-    const applications = navigation.getParam('applications', [])
-    const members = navigation.getParam('members', [])
-    const owner = navigation.getParam('owner', null)
+    const cardStyle = { flex: 0 }
 
     return (
       <Container>
         <Content>
-          <Card style={{ flex: 0 }}>
+          <Card style={cardStyle}>
             <CardItem>
               <Left>
                 {image && <Thumbnail source={{ uri: image }} />}
@@ -109,7 +102,7 @@ class OrgScreen extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <Text>Contact Info</Text>
+                <H3>Contact Info</H3>
                 {address && <Text>{address}</Text>}
                 {email && <Text>{email}</Text>}
                 {facebook && <Text>{facebook}</Text>}
@@ -120,14 +113,14 @@ class OrgScreen extends Component {
             </CardItem>
             <CardItem>
               <Left>
-                { user.data.uid !== owner && (
-                  <S.Button
-                    block
-                    onPress={this.handleApplyPress}
-                  >
-                    <Text>Apply to Org</Text>
-                  </S.Button>
-                )}
+                {/* { user.data.uid !== owner && ( */}
+                <S.Button
+                  block
+                  onPress={() => this.handleApplyPress(key, applications, members)}
+                >
+                  <Text>Apply to Org</Text>
+                </S.Button>
+                {/* )} */}
                 { user.data.uid === owner && (
                   <>
                     <S.Button
@@ -138,7 +131,9 @@ class OrgScreen extends Component {
                     </S.Button>
                     <S.Button
                       block
-                      onPress={() => navigation.push('Applications', { key, members, applications })}
+                      onPress={() => navigation.push('Applications', {
+                        key, members, applications, reloadOrgs: navigation.state.params.reloadOrgs
+                      })}
                     >
                       <Text>View Applications</Text>
                     </S.Button>

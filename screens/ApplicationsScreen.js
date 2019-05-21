@@ -42,12 +42,18 @@ S.Right = styled(Right)`
   flex-direction: row;
 `
 
-// @TODO reload applicant data after change
+// @TODO doesn't show applicants, button broken
 class ApplicationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Applications',
     headerLeft: (
-      <Button transparent onPress={() => navigation.goBack()}>
+      <Button
+        transparent
+        onPress={() => {
+          navigation.state.params.reloadOrgs()
+          navigation.popToTop()
+        }}
+      >
         <Icon ios='ios-close' android='md-close' />
       </Button>
     )

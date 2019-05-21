@@ -47,11 +47,23 @@ class OrgsScreen extends React.Component {
     data: null
   }
 
-  componentDidMount = async() => {
+  load = async() => {
     const querySnapshot = await db.collection('orgs').get()
     const data = []
     querySnapshot.forEach(doc => data.push({ ...doc.data(), key: doc.id }))
     this.setState({ data, loading: false })
+  }
+
+  handleReloadOrgs = () => {
+    this.setState({ loading: true })
+    this.load()
+  }
+
+  componentDidMount = () => {
+    const { navigation } = this.props
+
+    navigation.setParams({ reloadOrgs: this.handleReloadOrgs })
+    this.load()
   }
 
   render() {
@@ -67,7 +79,7 @@ class OrgsScreen extends React.Component {
               <S.Text>loading orgs...</S.Text>
             </S.View>
           ) : (
-            <List data={data} navigation={navigation} />
+            <List data={data} navigation={navigation} reloadOrgs={this.handleReloadOrgs} />
           )}
         </Content>
       </Container>
