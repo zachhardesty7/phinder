@@ -25,7 +25,7 @@ export class AuthService {
         // Sign in with credential from the Facebook user.
         const data = await Firebase
           .auth()
-          .signInAndRetrieveDataWithCredential(credential)
+          .signInWithCredential(credential)
 
         // prevent null's
         const user = ObjectFromEntries(Object.entries(data.user.providerData[0])

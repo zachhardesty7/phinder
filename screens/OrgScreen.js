@@ -113,15 +113,15 @@ class OrgScreen extends Component {
             </CardItem>
             <CardItem>
               <Left>
-                {/* { user.data.uid !== owner && ( */}
-                <S.Button
-                  block
-                  onPress={() => this.handleApplyPress(key, applications, members)}
-                >
-                  <Text>Apply to Org</Text>
-                </S.Button>
-                {/* )} */}
-                { user.data.uid === owner && (
+                {user.data.uid !== owner && (
+                  <S.Button
+                    block
+                    onPress={() => this.handleApplyPress(key, applications, members)}
+                  >
+                    <Text>Apply to Org</Text>
+                  </S.Button>
+                )}
+                {user.data.uid === owner && (
                   <>
                     <S.Button
                       block
@@ -132,7 +132,10 @@ class OrgScreen extends Component {
                     <S.Button
                       block
                       onPress={() => navigation.push('Applications', {
-                        key, members, applications, reloadOrgs: navigation.state.params.reloadOrgs
+                        key,
+                        members,
+                        applications,
+                        reloadOrgs: navigation.state.params.reloadOrgs
                       })}
                     >
                       <Text>View Applications</Text>
