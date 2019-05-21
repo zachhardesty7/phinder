@@ -36,7 +36,13 @@ class OrgsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Orgs',
     headerRight: (
-      <Button transparent onPress={() => navigation.push('OrgCreate')}>
+      <Button
+        transparent
+        onPress={() => {
+          const reloadOrgs = navigation.getParam('reloadOrgs')
+          navigation.push('OrgCreate', { reloadOrgs })
+        }}
+      >
         <Icon ios='ios-add' android='md-add' />
       </Button>
     )

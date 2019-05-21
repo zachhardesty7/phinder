@@ -71,7 +71,10 @@ class OrgCreateScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Create an Org',
     headerLeft: (
-      <Button transparent onPress={() => navigation.goBack()}>
+      <Button
+        transparent
+        onPress={() => navigation.goBack()}
+      >
         <Icon ios='ios-close' android='md-close' />
       </Button>
     )
@@ -79,7 +82,7 @@ class OrgCreateScreen extends Component {
 
   state = { loading: false, info: { owner: user.data.uid } }
 
-  handleSavePress = async() => {
+  handleCreatePress = async() => {
     const { info } = this.state
     const { navigation } = this.props
 
@@ -94,6 +97,7 @@ class OrgCreateScreen extends Component {
       buttonText: 'Okay'
     })
 
+    navigation.state.params.reloadOrgs()
     navigation.goBack()
   }
 
@@ -130,8 +134,9 @@ class OrgCreateScreen extends Component {
   }
 
   handleFormFieldChange = (key, value) => {
+    const { info } = this.state
     this.setState({
-      [key]: value
+      info: { ...info, [key]: value }
     })
   }
 
@@ -228,8 +233,8 @@ class OrgCreateScreen extends Component {
           </Form>
 
           <S.SubmitView>
-            <S.Button onPress={this.handleSavePress} title='Save Changes' success>
-              <S.Text>Save Changes</S.Text>
+            <S.Button onPress={this.handleCreatePress} title='Create Org' success>
+              <S.Text>Create Org</S.Text>
             </S.Button>
             <S.Button onPress={() => navigation.goBack()} title='Cancel' light>
               <S.Text>Cancel</S.Text>

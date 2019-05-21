@@ -38,16 +38,14 @@ S.Thumbnail = styled(Thumbnail)`
 
 S.Button = styled(Button)`
   display: flex;
-  flex: 1;
-  align-items: center;
-  text-align: center;
+  margin-right: 10px;
 `
 
 S.View = styled(View)`
   display: flex;
   flex: 1;
-  justify-content: center;
   flex-direction: row;
+  margin: 20px 0;
 `
 
 S.Text = styled(Text)`
