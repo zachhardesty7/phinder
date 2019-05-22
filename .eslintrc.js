@@ -48,6 +48,7 @@ module.exports = {
     'standard/computed-property-even-spacing': 'off',
     'standard/object-curly-even-spacing': 'off',
     'import/prefer-default-export': 'off',
+    'import/namespace': 'error',
     'no-console': 'off',
     'sort-imports': [
       'warn',

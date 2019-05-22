@@ -1,6 +1,7 @@
 const tintColor = '#2f95dc'
 
-export default {
+export const colors = {
+  pickerPlaceholder: '#bfc6ea',
   tintColor,
   tabIconDefault: '#ccc',
   tabIconSelected: tintColor,

@@ -12,7 +12,7 @@ import {
   Icon
 } from 'expo'
 import { Root } from 'native-base'
-import AppNavigator from './navigation/AppNavigator'
+import AppNavigator from './src/navigation/AppNavigator'
 
 export default class App extends React.Component {
   state = {

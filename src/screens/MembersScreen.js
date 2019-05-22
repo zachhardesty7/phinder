@@ -1,58 +1,19 @@
 import React from 'react'
-import styled from 'styled-components/native'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import {
-  Button,
   Container,
   Content,
-  Icon,
   Left,
   ListItem,
-  Right,
-  Spinner,
   Text
 } from 'native-base'
-import { db } from '../src/integrations'
+import { db } from '../utils/firebase'
 
-// import { List } from '../components'
-
-const S = {}
-
-S.View = styled(View)`
-  display: flex;
-  flex: 1;
-  align-self: center;
-  justify-content: center;
-`
-
-S.Spinner = styled(Spinner)`
-  display: flex;
-  align-self: center;
-  margin-top: 20px;
-`
-
-S.Text = styled(Text)`
-  text-align: center;
-`
-
-S.Right = styled(Right)`
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-`
+import * as S from '../components/styled'
 
 // @TODO reload applicant data after change
-class MembersScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Members',
-    headerLeft: (
-      <Button transparent onPress={() => navigation.goBack()}>
-        <Icon ios='ios-close' android='md-close' />
-      </Button>
-    )
-  })
-
-  state = {}
+export class MembersScreen extends React.Component {
+  state = { users: {} }
 
   componentDidMount = async() => {
     const { navigation } = this.props
@@ -86,14 +47,12 @@ class MembersScreen extends React.Component {
               )}
             />
           ) : (
-            <S.View>
+            <S.View.Center>
               <S.Text>no members...</S.Text>
-            </S.View>
+            </S.View.Center>
           )}
         </Content>
       </Container>
     )
   }
 }
-
-export default MembersScreen

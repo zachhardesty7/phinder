@@ -1,34 +1,11 @@
 import React from 'react'
-import {
-  Container,
-  Content,
-  H1,
-  Text
-} from 'native-base'
+import { Container, Content } from 'native-base'
 import { Calendar } from 'react-native-calendars'
-import { view } from 'react-easy-state'
-import styled from 'styled-components/native'
 
-const S = {}
+import * as S from '../components/styled'
 
-S.H1 = styled(H1)`
-  text-align: center;
-  padding: 30px 0;
-`
-
-S.Text = styled(Text)`
-  text-align: center;
-  padding: 5px;
-`
-
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Phinder'
-  };
-
-  state = {
-    selected: null
-  }
+export class HomeScreen extends React.Component {
+  state = { selected: null }
 
   render() {
     const { selected } = this.state
@@ -50,12 +27,10 @@ class HomeScreen extends React.Component {
         />
         <Content>
           {selected && (
-            <S.Text>No upcoming events, check back later</S.Text>
+            <S.Text padding='5px'>No upcoming events, check back later</S.Text>
           )}
         </Content>
       </Container>
     )
   }
 }
-
-export default view(HomeScreen)

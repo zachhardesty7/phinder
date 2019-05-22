@@ -1,65 +1,23 @@
 import React from 'react'
-import styled from 'styled-components/native'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import {
-  Button,
   Container,
   Content,
   Icon,
   Left,
   ListItem,
-  Right,
-  Spinner,
   Text,
   Toast
 } from 'native-base'
-import { db } from '../src/integrations'
+import { db } from '../utils/firebase'
 
-// import { List } from '../components'
+import * as S from '../components/styled'
 
-const S = {}
-
-S.View = styled(View)`
-  display: flex;
-  flex: 1;
-  align-self: center;
-  justify-content: center;
-`
-
-S.Spinner = styled(Spinner)`
-  display: flex;
-  align-self: center;
-  margin-top: 20px;
-`
-
-S.Text = styled(Text)`
-  text-align: center;
-`
-
-S.Right = styled(Right)`
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-`
+const iconStyle = { fontSize: 50, paddingLeft: 10, paddingRight: 10 }
 
 // @TODO doesn't show applicants, button broken
-class ApplicationsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Applications',
-    headerLeft: (
-      <Button
-        transparent
-        onPress={() => {
-          navigation.state.params.reloadOrgs()
-          navigation.popToTop()
-        }}
-      >
-        <Icon ios='ios-close' android='md-close' />
-      </Button>
-    )
-  })
-
-  state = { loading: true }
+export class ApplicationsScreen extends React.Component {
+  state = { loading: true, users: {} }
 
   componentDidMount = async() => {
     const { navigation } = this.props
@@ -142,10 +100,10 @@ class ApplicationsScreen extends React.Component {
       <Container>
         <Content>
           {loading && (
-            <S.View>
+            <S.View.Center>
               <S.Spinner color='blue' />
               <S.Text>loading applicants...</S.Text>
-            </S.View>
+            </S.View.Center>
           )}
           {users && (users.length ? (
             <FlatList
@@ -156,21 +114,19 @@ class ApplicationsScreen extends React.Component {
                     <Text>{item.displayName}</Text>
                   </Left>
                   <S.Right>
-                    <Icon style={{ fontSize: 50, paddingLeft: 10, paddingRight: 10 }} name='checkmark' onPress={() => this.handleAcceptPress(item.uid)} />
-                    <Icon style={{ fontSize: 50, paddingLeft: 10, paddingRight: 10 }} name='close' onPress={() => this.handleDeclinePress(item.uid)} />
+                    <Icon style={iconStyle} name='checkmark' onPress={() => this.handleAcceptPress(item.uid)} />
+                    <Icon style={iconStyle} name='close' onPress={() => this.handleDeclinePress(item.uid)} />
                   </S.Right>
                 </ListItem>
               )}
             />
           ) : (
-            <S.View>
+            <S.View.Center>
               <S.Text>no applicants...</S.Text>
-            </S.View>
+            </S.View.Center>
           ))}
         </Content>
       </Container>
     )
   }
 }
-
-export default ApplicationsScreen
