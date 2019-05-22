@@ -95,15 +95,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-## Special Acknowledgements
-
-* [Javascript Standard JS & Airbnb Hybrid Style][style] - Airbnb's JS ESLint config + JS Standard Style
-* [Gatsby v2][gatsbyGH] - Build blazing fast, modern apps and websites with React
-* [React][reactGH] - A declarative, efficient, and flexible JavaScript library for building user interfaces
-* [Semantic UI React][semanticGH] - The official Semantic-UI-React integration
-* [Font Awesome React][faGH] - Font Awesome 5 React component using SVG with JS
-* [React Scroll][scrollGH] - Component for animating vertical scrolling
-
 <!-- Markdown link & img definitions -->
 [react-native]: https://facebook.github.io/react-native/
 [expo]: https://expo.io/
