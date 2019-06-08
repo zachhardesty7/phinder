@@ -3,7 +3,28 @@
 Mobile app proof-of-concept (PoC) that helps organizations and
 students on campus connect with each other.
 
-## Description
+## Access Links
+
+Want to [view a live (simulated) demo][demo] with databases with dummy info?
+
+Want to [read a brief case study][case-study] about the project on my website?
+
+Want to [view the project on expo][expo-project]?
+
+Want to [run the actual app][expo-import] within the expo app? (Android only)
+
+## Showcase
+
+[View all full size demo images](https://imgur.com/a/HqIgwU2)
+
+<img src="https://i.imgur.com/jLr1yUC.png" alt="Main Page" width="30%"/>
+<img src="https://i.imgur.com/I4caDIH.png" alt="Org List Page" width="30%"/>
+<img src="https://i.imgur.com/2hcwcZw.png" alt="Org Details Page" width="30%"/>
+<img src="https://i.imgur.com/dZYMnc7.png" alt="Create Org Page" width="30%"/>
+<img src="https://i.imgur.com/HxJcyPa.png" alt="Create Org Page 2" width="30%"/>
+<img src="https://i.imgur.com/afQbzbx.png" alt="Profile Page" width="30%"/>
+
+## Tools
 
 Built with [React Native][react-native], [Expo][expo], &
 [NativeBase][native-base].
@@ -16,16 +37,6 @@ Uses [React Native Calendars][react-native-calendars] for upcoming events.
 
 Uses [Styled Components][styled-components] to create reusable and isolated style
 components much easier than React Native stylesheets.
-
-## External Links
-
-Want to view a [live (simulated) demo][demo] with databases with dummy info?
-
-Want to read a [brief case study][case-study] about the project on my website?
-
-Want to view the [project on expo][expo-project]?
-
-Click the link to [run the actual app][expo-import] within the expo app? (Android only)
 
 ## Dependencies & Installation
 
@@ -95,7 +106,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-<!-- Markdown link & img definitions -->
+<!-- link definitions -->
 [react-native]: https://facebook.github.io/react-native/
 [expo]: https://expo.io/
 [native-base]: https://nativebase.io/
