@@ -1,6 +1,5 @@
-import 'firebase/firestore'
-import * as Facebook from 'expo-facebook'
 import firebase from 'firebase/app'
+import * as Facebook from 'expo-facebook'
 
 import { db } from './firebase'
 import { secret } from './secret'
@@ -55,7 +54,14 @@ export async function loginWithFacebook() {
 }
 
 export async function logout() {
-  return firebase.auth().signOut()
+  try {
+    return await firebase.auth().signOut()
+  } catch (error) {
+    console.error('logout of firebase failed')
+    console.error(error)
+  }
+
+  return null
 }
 
 /**

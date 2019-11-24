@@ -2,8 +2,6 @@ import React from 'react'
 import { AsyncStorage } from 'react-native'
 import { Container, Content } from 'native-base'
 
-import 'firebase/firestore'
-
 import { view } from 'react-easy-state'
 import { loginWithFacebook, subscribeAuthChange } from '../utils/auth'
 import { db } from '../utils/firebase'
