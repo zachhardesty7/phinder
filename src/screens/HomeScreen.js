@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-calendars'
 
 import * as S from '../components/styled'
 
+// TODO: upgrade to hooks
 export class HomeScreen extends React.Component {
   state = { selected: null }
 

@@ -1,5 +1,5 @@
 import 'firebase/firestore'
-import { Facebook } from 'expo'
+import * as Facebook from 'expo-facebook'
 import firebase from 'firebase/app'
 
 import { db } from './firebase'

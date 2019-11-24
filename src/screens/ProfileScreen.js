@@ -25,6 +25,7 @@ import { colors } from '../constants/colors'
 import * as S from '../components/styled'
 
 export const ProfileScreen = view(
+  // TODO: upgrade to hooks
   class Profile extends React.Component {
     state = {
       loading: false,

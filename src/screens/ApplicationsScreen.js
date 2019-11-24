@@ -16,6 +16,7 @@ import * as S from '../components/styled'
 const iconStyle = { fontSize: 50, paddingLeft: 10, paddingRight: 10 }
 
 // @TODO doesn't show applicants, button broken
+// TODO: upgrade to hooks
 export class ApplicationsScreen extends React.Component {
   state = { loading: true, users: {} }
 

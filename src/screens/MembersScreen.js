@@ -12,6 +12,7 @@ import { db } from '../utils/firebase'
 import * as S from '../components/styled'
 
 // @TODO reload applicant data after change
+// TODO: upgrade to hooks
 export class MembersScreen extends React.Component {
   state = { users: {} }
 

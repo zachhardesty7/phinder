@@ -6,6 +6,7 @@ import { List } from '../components'
 
 import * as S from '../components/styled'
 
+// TODO: upgrade to hooks
 export class OrgsScreen extends React.Component {
   state = {
     loading: true,

@@ -5,11 +5,12 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import { Asset } from 'expo-asset'
+import * as Font from 'expo-font'
+import * as Icon from '@expo/vector-icons'
+
 import {
-  AppLoading,
-  Asset,
-  Font,
-  Icon
+  AppLoading
 } from 'expo'
 import { Root } from 'native-base'
 import AppNavigator from './src/navigation/AppNavigator'

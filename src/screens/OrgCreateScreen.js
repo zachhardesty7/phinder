@@ -1,5 +1,7 @@
 import React from 'react'
-import { ImagePicker, Permissions } from 'expo'
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
+
 import {
   Container,
   Content,
@@ -23,6 +25,7 @@ import { user } from '../utils/userStore'
 import * as S from '../components/styled'
 
 export const OrgCreateScreen = view(
+  // TODO: upgrade to hooks
   class OrgCreate extends React.Component {
     state = { loading: false, info: { owner: user.data.uid } }
 

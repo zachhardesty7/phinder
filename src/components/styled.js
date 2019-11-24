@@ -116,7 +116,7 @@ const SForm = styled(Form)`
  * const Component = () => (
  *  <div>
  *    <S.Thumbnail />
- *    <S.ESLINTERROR />
+ *    <S.SForm />
  *    <Text>Lorem Ipsum</Text>
  *  </div>
  * )

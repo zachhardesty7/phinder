@@ -1,17 +1,17 @@
 # Phinder
 
-Mobile app proof-of-concept (PoC) that helps organizations and
+Mobile app proof-of-concept that helps organizations and
 students on campus connect with each other.
 
 ## Access Links
 
 Want to [view a live (simulated) demo][demo] with databases with dummy info?
 
-Want to [read a brief case study][case-study] about the project on my website?
-
 Want to [view the project on expo][expo-project]?
 
-Want to [run the actual app][expo-import] within the expo app? (Android only)
+COMING SOON: Want to [read a brief case study][case-study] about the project on my website?
+
+COMING SOON: Want to [run the actual app][expo-import] within the expo app? (Android only)
 
 ## Showcase
 
@@ -65,7 +65,7 @@ yarn dev
 
 ## Known Issues / Todo List
 
-* signin only supports Facebook
+* sign in only supports Facebook
 * loading pages are mediocre
 * any page transitions can be tapped multiple times and all added to stack
 * no way to display or interact with "Upcoming Events" (not linked to DB)
