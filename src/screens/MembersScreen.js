@@ -12,48 +12,46 @@ import { db } from '../utils/firebase'
 import * as S from '../components/styled'
 
 // @TODO reload applicant data after change
-// TODO: upgrade to hooks
-export class MembersScreen extends React.Component {
-  state = { users: {} }
+export const MembersScreen = ({ navigation }) => {
+  const [users, setUsers] = React.useState({})
 
-  componentDidMount = async() => {
-    const { navigation } = this.props
-    const members = navigation.getParam('members', [])
+  React.useEffect(() => {
+    const update = async() => {
+      const members = navigation.getParam('members', [])
 
-    const users = await Promise.all(members.map(uid => (
-      db.collection('users').doc(uid).get()
-    )))
+      const usersNext = await Promise.all(members.map(uid => (
+        db.collection('users').doc(uid).get()
+      )))
 
-    const usersData = users.map(user => user.data())
-    const usersKeyed = usersData.map(user => ({ ...user, key: user.uid }))
+      const usersData = usersNext.map(user => user.data())
+      const usersKeyed = usersData.map(user => ({ ...user, key: user.uid }))
 
-    this.setState({ users: usersKeyed })
-  }
+      setUsers(usersKeyed)
+    }
 
-  render() {
-    const { users } = this.state
+    update()
+  }, [navigation])
 
-    return (
-      <Container>
-        <Content>
-          {users ? (
-            <FlatList
-              data={users}
-              renderItem={({ item }) => (
-                <ListItem activeOpacity={0.5}>
-                  <Left>
-                    <Text>{item.displayName}</Text>
-                  </Left>
-                </ListItem>
-              )}
-            />
-          ) : (
-            <S.View.Center>
-              <S.Text>no members...</S.Text>
-            </S.View.Center>
-          )}
-        </Content>
-      </Container>
-    )
-  }
+  return (
+    <Container>
+      <Content>
+        {users ? (
+          <FlatList
+            data={users}
+            renderItem={({ item }) => (
+              <ListItem activeOpacity={0.5}>
+                <Left>
+                  <Text>{item.displayName}</Text>
+                </Left>
+              </ListItem>
+            )}
+          />
+        ) : (
+          <S.View.Center>
+            <S.Text>no members...</S.Text>
+          </S.View.Center>
+        )}
+      </Content>
+    </Container>
+  )
 }
