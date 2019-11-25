@@ -5,7 +5,6 @@ import {
 	Form,
 	H1,
 	Icon,
-	Picker,
 	Right,
 	Separator,
 	Spinner,
