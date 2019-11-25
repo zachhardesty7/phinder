@@ -5,7 +5,10 @@ students on campus connect with each other.
 
 ## Access Links
 
-Want to [view a live (simulated) demo][demo] with databases with dummy info?
+Want to [view a live (simulated) demo][demo] with databases with dummy info? Click "Tap to Play" on
+the next page and
+then scroll down and click "Open project in
+Expo."
 
 Want to [view the project on expo][expo-project]?
 
