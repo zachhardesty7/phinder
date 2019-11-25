@@ -15,6 +15,18 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "eslintConfig": {
+    "extends": [
+      "plugin:react-native/all",
+      "hardesty"
+    ],
+    "plugins": [
+      "react-native"
+    ],
+    "env": {
+      "react-native/react-native": true
+    }
+  },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
     "babel-preset-react-native": "^4.0.1",
@@ -46,6 +58,7 @@
     "babel-preset-expo": "^7.1.0",
     "eslint": "^6.7.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-hardesty": "^1.1.5",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",

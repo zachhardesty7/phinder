@@ -22,8 +22,7 @@ export const AuthScreen = view(({ navigation }) => {
   return (
     <Container>
       <Content>
-        <S.Text>Welcome!</S.Text>
-        <S.Button onPress={loginWithFacebook} title='Login with Facebook'>
+        <S.Button onPress={loginWithFacebook} title='Login with Facebook' marginRight='15px'>
           <S.Text>Login with Facebook</S.Text>
         </S.Button>
       </Content>

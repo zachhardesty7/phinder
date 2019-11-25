@@ -63,26 +63,27 @@ export const ProfileScreen = view(({ navigation }) => {
           <S.Form>
             <Item stackedLabel>
               <Label>Full Name</Label>
-              <Input value={data.displayName} onChangeText={text => handleFormFieldChange('displayName', text)} />
+              <Input value={data.displayName} onChangeText={(text) => handleFormFieldChange('displayName', text)} />
             </Item>
             <Item stackedLabel>
               <Label>Email</Label>
-              <Input value={data.email} onChangeText={text => handleFormFieldChange('email', text)} />
+              <Input value={data.email} onChangeText={(text) => handleFormFieldChange('email', text)} />
             </Item>
             <Item stackedLabel>
               <Label>Phone</Label>
-              <Input value={data.phoneNumber} onChangeText={text => handleFormFieldChange('phoneNumber', text)} />
+              <Input value={data.phoneNumber} onChangeText={(text) => handleFormFieldChange('phoneNumber', text)} />
             </Item>
-            <Item picker stackedLabel>
+            <Item stackedLabel style={{ alignItems: 'flex-start' }}>
               <Label>Year</Label>
               <Picker
                 mode='dropdown'
+                textStyle={{ paddingLeft: 0 }}
                 iosIcon={<Icon name='arrow-down' />}
                 placeholder='select your year'
                 placeholderStyle={{ color: colors.pickerPlaceholder }}
                 placeholderIconColor='#007aff'
                 selectedValue={data.year}
-                onValueChange={val => handleFormFieldChange('year', val)}
+                onValueChange={(val) => handleFormFieldChange('year', val)}
               >
                 <Picker.Item label='Freshman' value='freshman' />
                 <Picker.Item label='Sophomore' value='sophomore' />
@@ -92,14 +93,14 @@ export const ProfileScreen = view(({ navigation }) => {
             </Item>
             <Item stackedLabel>
               <Label>Major</Label>
-              <Input value={data.major} onChangeText={text => handleFormFieldChange('major', text)} />
+              <Input value={data.major} onChangeText={(text) => handleFormFieldChange('major', text)} />
             </Item>
             <Item stackedLabel>
               <Label>Bio</Label>
               <Textarea
                 rowSpan={4}
                 value={data.bio}
-                onChangeText={text => handleFormFieldChange('bio', text)}
+                onChangeText={(text) => handleFormFieldChange('bio', text)}
                 placeholder='Write a little something about yourself!'
               />
             </Item>

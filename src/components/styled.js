@@ -1,15 +1,16 @@
 import { View } from 'react-native'
 
 import {
-  Button,
-  Form,
-  H1,
-  Icon,
-  Right,
-  Separator,
-  Spinner,
-  Text,
-  Thumbnail
+	Button,
+	Form,
+	H1,
+	Icon,
+	Picker,
+	Right,
+	Separator,
+	Spinner,
+	Text,
+	Thumbnail,
 } from 'native-base'
 import styled from 'styled-components/native'
 
@@ -41,6 +42,7 @@ const SButton = styled(Button)`
   flex: 1;
   justify-content: center;
   margin-left: ${({ marginLeft = '15px' }) => marginLeft};
+  margin-right: ${({ marginRight = '0' }) => marginRight};
 `
 
 const SButtonRound = styled(Button)`
@@ -96,7 +98,6 @@ const SRight = styled(Right)`
 `
 
 const SForm = styled(Form)`
-  /* margin-right: 15px; */
   padding-right: 15px;
 `
 
@@ -122,15 +123,15 @@ const SForm = styled(Form)`
  * )
  */
 export {
-  SIconRight as IconRight,
-  SForm as Form,
-  SSeparator as Separator,
-  SThumbnail as Thumbnail,
-  SRight as Right,
-  SH1 as H1,
-  SView as View,
-  SText as Text,
-  SButton as Button,
-  SButtonRound as ButtonRound,
-  SSpinner as Spinner
+	SIconRight as IconRight,
+	SForm as Form,
+	SSeparator as Separator,
+	SThumbnail as Thumbnail,
+	SRight as Right,
+	SH1 as H1,
+	SView as View,
+	SText as Text,
+	SButton as Button,
+	SButtonRound as ButtonRound,
+	SSpinner as Spinner,
 }
